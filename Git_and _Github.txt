@@ -1,0 +1,128 @@
+-> Git
+
+- Git is a version control system.
+- Git helps you keep track of code changes.
+
+- Git and GitHub are two different things.
+
+- What git can do :- 
+	- Manage projects with Repositories
+	- Clone a project to work on a local copy
+	- Control and track changes with Staging and Committing
+	- Branch and Merge to allow for work on different parts and versions of a project
+	- Pull the latest version of the project to a local copy
+	- Push local updates to the main project
+	- Tracking code changes and who made changes.
+
+- Git commands :- 
+
+1) git --version :- To check the version of git.
+
+2) git config --global user.name "name" :- To set global name and email so that others can see who made changes.
+   git config --global user.email "email"
+   
+   git config --global user.name :- To view what username and useremail you have set.
+   git config --global user.email
+
+   We can also set user.name amd uer.email using following command
+   git config --global --edit :- It will open file which stores your information in VIM(is in linux) editor.
+
+- Repository :- A folder that can be tracked with the help of git.
+
+3) mkdir "folderName"
+   cd "folderName"
+   git init :- To make this folder as git repository so that git can keep track of this repository.
+   ls -a :- Will show all the files including hidden files, We will see a .git folder which actually keeps the track of the changes made.
+
+4) git status :- Gives us the details of the changes made in this repository i.e changes,modification,deletion.
+
+   In git firts we track(with the help of below command) a file and then commit a file.
+
+- Staging area :- Where we keep our changes of file/files before commiting  file/files.   {   Working_Directory -----(5)-----> Staging_Area -----(6)-----> Repository   }
+	Example :- Lets say we have 40 files in a project and we want to commit only 10-15 files in 1 particular commit, then in this case we put these files in staging area.
+ 
+5) git add <fileName1> <fileName2> .... <fileName n> :- To add 'n' of file in staging area.
+   git add .  :- dot(.) will add all files in staging area.
+   git add -A :- To add all the files in staging area.
+
+6) git commit -m "message" :- To commit files from staging area to repository , -m is used for message. 
+
+7) git log :- Will give us the details of all commits.
+
+- Remember when after commiting a file when we do changes in that(commited) file ,then again we have to add that(commited) file in staging area(5) and then only we can commit that file(6)
+
+- How to track changes in git? :- We can track changes in 3 postion i.e (i)when file is modified but not added to staged area , (ii)when file is modified and added in stagged area ,
+					    (iii)after commiting a file.
+
+8) git diff :- Will show all the lines and newly added lines are in green color whereas deleted one will be shown in red color.
+   git diff --staged :- when file is in the staged area.
+   git diff HEAD :- when file is commited.(Didn't work :- Try to execute it).
+
+9) git rm -f fileName :- To remove file from staging area as well as working directory(means deleting the file completely). -f is used for forcefully deletion.
+   git rm --cached fileName :- To remove file from staging area only.
+
+10) git checkout < hashCode/branchName > :- Used to go back to any commit.
+
+- Branch :- Branches are used to work on different different features/versions , and when all features becomes stable then we combine all branches to main branch i.e master branch.
+		Branches are hierarical that means one branch can have multiple branches.
+		Branches are useful when many people working on a single project/feature.
+
+11) git branch :- Will display all the branches.
+
+12) git branch branchName :- To create a branch , To switch to this newly generated branch use (8).
+
+		Example: by default we have master branch, we can create branches as - git branch b1 and git branch b2 , will generate 2 branches under master
+																									/\
+																								     b1 b2
+			  with {git branch b1} will create branch b1 under master,then {git checkout b1} we are under b1 branch and creating another branch under b1 i.e b2 uisng {git branch b2}
+			  now we have structure (master -> b1 -> b2).
+
+13) git branch -d branchName :- To delete a branch with name branchName.-d will delete after merging and if we want to delete without merging we use -D.
+
+14) git merge branchName :- Used to merge a branch with its parent/super branch. To merge a branch we must be at its parent branch.
+
+15) git checkout -b branchName :- Will create a branch with branchName and take us to that branch.
+
+.gitignore :- When we want some of our files should not go into git ecosystem(so that git should not track them) then we add those files in .gitignore file.
+		  To create a empty .gitignore file we will use {touch .gitignore} command , and provide name of all the files in .gitignore .
+		  Now git will not track all the files in .gitignore but git will be tracking .gitignore file , to overcome this we add .gitignore file to .gitignore file itself.
+		  We can also provide folder name in .gitignore so that it should not be tracked and pushed , to do this we use { folderName/ } . Remember to use '/' after folder name.
+		  * We add those files/folder in .gitignore file which contains sensitive information or large in size.
+			
+
+
+
+-> GitHub
+
+1) git remote add origin URL :- To set remote reporsitory where we want to push/pull our code. 
+
+	Origin is just the name of connection although we can have any name but it's recommended to use origin.
+	We can verify it using below command.
+
+2) git remote -v :- Will show origin(name of the remote connection) details for push and pull.
+
+3) git branch -M main :- Using this command just to rename the branch , from master to main. NOT MUCH IMPORTANT COMMAND.
+
+4) git push -u origin branchName :- Will push our branch from local repository to origin repository. We can push as many branches as we want.
+	
+	NOTE:- If using (3) then give main as branchName unless master as branchName. This is only for main/master branch.
+		 If want to push any other branch then use (4) again with NAME_OF_THE_BRANCH you want to push on Github.
+
+- After pushing our files to Github when we do changes in our file , then we have to add those files into the staged_area using (5) and have to perform commit using (6).
+   after commiting , our changes is still in local repository and if we want to push the changes on Github we have to use { git push }.
+   No need to write { -u origin branchName } because our machine knows now where to push.
+
+- Fork :- We can take any open source repository to our personal Github account (If that person(who's repository we are forking) has added you as a contributor in his account)
+- Pull :- After doing changes in forked repository when you want add your changes to main repository(that person's repository) then from your account you generate a pull request , 
+	    and it's upto the owner of repository whether the owner want to merge your changes into main repository , if owner wants to accept your changes then owner has to accept 
+	    the pull request and then merge your repository with the main repository.
+
+(5) git clone Github_URL :- To bring a copy of repository from remote to our local machine.
+
+
+
+
+
+
+
+
