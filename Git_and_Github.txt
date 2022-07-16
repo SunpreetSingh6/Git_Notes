@@ -69,7 +69,7 @@
 
 11) git branch :- Will display all the branches.
 
-12) git branch branchName :- To create a branch , To switch to this newly generated branch use (11).
+12) git branch branchName :- To create a branch , To switch to this newly generated branch use (10).
 
 		Example: by default we have master branch, we can create branches as - git branch b1 and git branch b2 , will generate 2 branches under master
 																									/\
