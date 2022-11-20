@@ -35,6 +35,8 @@
    ls -a :- Will show all the files including hidden files, We will see a .git folder which actually keeps the track of the changes made.
 
 4) git status :- Gives us the details of the changes made in this repository i.e changes,modification,deletion.
+			- This command will give names of all the files that have been changed and not changed 
+			  and needs to be added into the staging area in order to commit those(changed) files.
 
    In git firts we track(with the help of below command) a file and then commit a file.
 
