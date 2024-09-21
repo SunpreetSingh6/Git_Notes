@@ -34,13 +34,13 @@
    git init :- To make this folder as git repository so that git can keep track of this repository.
    ls -a :- Will show all the files including hidden files, We will see a .git folder which actually keeps the track of the changes made.
 
-4) git status :- Gives us the details of the changes made in this repository i.e changes,modification,deletion.
+4) git status :- Gives us the details of the changes made in this repository i.e. changes ,modification ,deletion.
 			- This command will give names of all the files that have been changed and not changed 
 			  and needs to be added into the staging area in order to commit those(changed) files.
 
-   In git firts we track(with the help of below command) a file and then commit a file.
+   In git first we track(with the help of below command) a file and then commit a file.
 
-- Staging area :- Where we keep our changes of file/files before commiting  file/files.   {   Working_Directory -----(5)-----> Staging_Area -----(6)-----> Repository   }
+- Staging area :- Where we keep our changes of file/files before committing  file/files.   {   Working_Directory -----(5)-----> Staging_Area -----(6)-----> Repository   }
 	Example :- Lets say we have 40 files in a project and we want to commit only 10-15 files in 1 particular commit, then in this case we put these files in staging area.
  
 5) git add <fileName1> <fileName2> .... <fileName n> :- To add 'n' of file in staging area.
@@ -49,68 +49,163 @@
 
 6) git commit -m "message" :- To commit files from staging area to repository , -m is used for message. 
 
+	git commit -am "message" :- This command will add the file/files(already tracked) in staging area and commit the files.
+
 7) git log :- Will give us the details of all commits.
+   git log --oneline :- Will provide the summarized logs each in one line only. 
 
-- Remember when after commiting a file when we do changes in that(commited) file ,then again we have to add that(commited) file in staging area(5) and then only we can commit that file(6)
+- Remember when after committing a file when we do changes in that(committed) file ,then again we have to add that(committed) file in staging area(5) and then only we can commit that file(6)
 
-- How to track changes in git? :- We can track changes in 3 postion i.e (i)when file is modified but not added to staged area , (ii)when file is modified and added in stagged area ,
-					    (iii)after commiting a file.
+- How to track changes in git? :- We can track changes in 3 position i.e (i)when file is modified but not added to staged area , (ii)when file is modified and added in stagged area ,
+					    (iii)after committing a file.
 
-8) git diff :- Will show all the lines and newly added lines are in green color whereas deleted one will be shown in red color.
-   git diff --staged :- when file is in the staged area.
-   git diff HEAD :- when file is commited.(Didn't work :- Try to execute it).
+8) git diff :- Will show difference in lines in comparison of last committed lines for all files.
+   git diff fileName:- Will show difference in lines in comparison of last committed lines for a specific file.
+	Will show all the lines and newly added lines are in green color whereas deleted one will be shown in red color.
+   git diff --staged :- When file is in the staged area.
+   git diff HEAD :- Shows difference in all files whether files are untracked or in stagged area.
+   git diff oldCommitHash newCommitHash/git diff newCommitHash oldCommitHash :- Show difference between 2 commits(Hash order matters).
+   git diff oldCommitHash..newCommitHash/git diff newCommitHash..oldCommitHash :- Show difference between 2 commits(Hash order matters).
 
 9) git rm -f fileName :- To remove file from staging area as well as working directory(means deleting the file completely). -f is used for forcefully deletion.
    git rm --cached fileName :- To remove file from staging area only.
 
-10) git checkout < hashCode/branchName > :- Used to go back to any commit.
+10) git checkout < hashCode/branchName > :- Used to go back to any commit or branch.
+    git checkout filename :- It is used to discard the changes of a file which are not stagged yet.
+    git checkout . :- Discard all the files changes and all files which are not stagged yet.
+    git checkout - :- This command is used to go to the last checked out branch(hyphen[-] is being used).
 
-- Branch :- Branches are used to work on different different features/versions , and when all features becomes stable then we combine all branches to main branch i.e master branch.
-		Branches are hierarical that means one branch can have multiple branches.
+- Branch :- Branches are used to work on different features/versions , and when all features becomes stable then we combine all branches to main branch i.e. master branch.
+		Branches are hierarchal that means one branch can have multiple branches.
 		Branches are useful when many people working on a single project/feature.
 
 11) git branch :- Will display all the branches.
 
-12) git branch branchName :- To create a branch , To switch to this newly generated branch use (10).
+12) git branch branchName :- To create a branch , To switch to this newly generated branch use (10,14).
 
 		Example: by default we have master branch, we can create branches as - git branch b1 and git branch b2 , will generate 2 branches under master
-																									/\
-																								     b1 b2
-			  with {git branch b1} will create branch b1 under master,then {git checkout b1} we are under b1 branch and creating another branch under b1 i.e b2 uisng {git branch b2}
+			 now we have structure (master -> b1,b2)
+			  with {git branch b1} will create branch b1 under master, then {git checkout b1} we are under b1 branch and creating another branch under b1 i.e. b2 using {git branch b2}
 			  now we have structure (master -> b1 -> b2).
+   
+    git branch -r :- Will display all the branches of the remote repository. By default only default branch comes in local repository after cloning a repository.
+			To get the code of other branches we just need to checkout/switch to that branch.
+    git branch -m newBranchName :- To rename the branch, we must be at branch whose name we want to change.
+    git branch -d branchName :- To delete a branch with name branchName.-d will delete after merging and if we want to delete without merging we use -D.
+    git merge branchName :- Used to merge a branch with its parent/super branch. To merge a branch we must be at its parent branch.
 
-13) git branch -d branchName :- To delete a branch with name branchName.-d will delete after merging and if we want to delete without merging we use -D.
+13) git checkout -b branchName :- Will create a branch with branchName and take us to that branch.
+    git checkout filename :- It is used to discard the changes of a file while file is not staged.
 
-14) git merge branchName :- Used to merge a branch with its parent/super branch. To merge a branch we must be at its parent branch.
+14) git switch "branchName" :- This command can also be used to switch between multiple branches.
+    git switch - :- This command is used to go to the last checked out branch(hyphen[-] is being used).
+    git switch -c "branchName" :- This command will create a new branch and switched to the newly created branch.
 
-15) git checkout -b branchName :- Will create a branch with branchName and take us to that branch.
+Git Amend is used when we need to edit the previous commits instead of making a new commit.
+
+15) git commit --amend -m "message" :- This command is used to edit the previous commit.
+
+Restore is used to discard the changes of the files.
+
+16) git restore :- This command is used to restore the changes.
+		Suppose we updated a file in master branch, which needs to added in the staged area.
+		Now when we create a new branch from master branch that untracked file(updated file) still needs to added into staged area of new branch.
+		To discard the changes in new branch we use restore command.
+    git restore fileName  :- This command is used to discard the changes of a particular unstaged file.
+    git restore --staged :- Discard the changes of all the files from staged area.
+    git restore --staged fileName :- Discard the changes of a specific file from staged area which brings the file to unstage area.
+    git restore . :- To discard the changes of all the files which exist in unstaged area. This command hides --worktree i.e. git restore --worktree .
+    git restore --staged --worktree . :- To discard all the changes(whether files in staged or unstaged) and bring the code to the last commit.
+    git restore --source/-s=commitHash filename :- We can revert back the code of any commit by using this command. If we want previous file content
+						then we can simply add the file into stagged area and commit else we can discard using git restore filename .
+
+
+Stash is used to temporary store the changes in branch(instead of commit) while switching to another branch so that changes should not come in another branch 
+or to bypass any conflicts if exist.
+
+17) git stash :- It is used to stash the changes before switching to another branch.
+    git stash list :- Provides the list of all the stash's of a branch. 
+    git stash pop :- It brings back the last stashed changes to the branch.
+    git stash apply :- It applies the last stashed changes to the branch, and stash remains on stash list unlike pop.
+    git stash apply stash@{no.} :- It applies the particular stashed changes to the branch.
+    git stash drop stash@{no.} :- Deletes the stash from the list.
+    git stash clear :- Clear the entire stash list.
+    git stash -- fileName :- To stash only one specific file.
+    git stash -m "message" -- fileName :- To stash only one specific file with message.
+    git stash -m "message" :- To stash only one existing file with message.
+    git stash show stash@{no.} :- Provides the details about the stash.
+    git stash show -p stash@{no.} :- Shows all the changes of the stash.
+    git stash --keep-index :- Stash only untracked file.
+
+Reset is used to move the HEAD to specific commit. Once it is moved the commit history changes.
+
+18) git reset :- It is used to remove all the files from stagging area. This command includes --mixed which is hidden i.e. git reset --mixed
+    git reset --soft HEAD~1 :- We committed something, but there's a mistake and we want to make changes before committing again.
+				It undo the last commit but keeps the changes in stagging area because of --soft.
+				HEAD~1 means previous commit from HEAD.
+    git reset --mixed HEAD~1:- It undo the last commit and files goes to unstagging area.
+    git reset --mixed HEAD :- Discard changes and reset to the last commit i.e. files doesn't go to stagging or unstagging area they are removed.
+
+    git reset --soft hash :- Reset to a specific commit, keeping changes in the working directory.
+				We go to a specific commit all the files from first commit till that commit and the files from that commit to HEAD(latest commit) will be added into stagged area.
+    git reset --mixed hash :- Reset to a specific commit, unstage changes, keeping changes in the working directory.
+				We go to a specific commit all the files from first commit till that commit will be added into unstagged area,
+				and the files from that commit to HEAD(latest commit) will be added into untracked files.
+    git reset --hard hash :- Reset to a specific commit, discard all changes.
+
+Reset command basically changes the history of the commit which is not a good approach hence if we want to go back to any commit we must use Revert command
+	Lets say we have 10 commits, we want the code which is at 6th commit now if we use reset commit we will lost few commits after 6th.
+The problem with reset command is that it deletes some commit history while we go back to any commit in local repository. While if someone is also
+working in same cloned repository there the deleted commit still exist. Hence while merging we might get conflicts.
+
+Revert moves the HEAD to specific commit and creates a new commit.
+
+19) git revert hash :- It is used to move the HEAD to specific commit which leads to creation of another commit.
+			If we have 4 commits and we want to get to the 2nd commit we must use the hash of 3rd commit.
+
+Rebasing :- We have main branch where many developers are working together. We have another branch called feature which might take few weeks to complete
+while main branch is getting change frequently and needs to be merged frequently. Now when we merge the main branch with feature it creates an extra commit
+each time we merge, which is not a good practice.
+Hence we use rebasing in which feature branch points to the tip of main branch. 
+Now when the main branch gets any new commit it will be incorporated automatically in feature branch.
+
+Rebase is used to keep our commit history clean.
+Rebase shouldn't be used on shared branch.
+20) git rebase branchName :- It is use to rebase the branch.
+				To rebase we must be at the branch which should be added to tip of provided branchName.
+				i.e. git rebase master - we must be at feature branch because feature branch needs to rebase on master.
+
+ HEAD :- HEAD points to the latest commit of the each branch.
+ HEAD points to BranchName and it points LatestCommit.
+ Detach HEAD :- In this condition in which HEAD points to any specific commit instead of any branchName.
 
 .gitignore :- When we want some of our files should not go into git ecosystem(so that git should not track them) then we add those files in .gitignore file.
 		  To create a empty .gitignore file we will use {touch .gitignore} command , and provide name of all the files in .gitignore .
-		  Now git will not track all the files in .gitignore but git will be tracking .gitignore file , to overcome this we add .gitignore file to .gitignore file itself.
+		  Now git will not track all the files in .gitignore but git will be tracking .gitignore file , to overcome this we add .gitignore file name to .gitignore file itself.
 		  We can also provide folder name in .gitignore so that it should not be tracked and pushed , to do this we use { folderName/ } . Remember to use '/' after folder name.
+		  / represents a directory/folder.
 		  * We add those files/folder in .gitignore file which contains sensitive information or large in size.
 			
 
 
 -> GitHub using git commands:- 
 
-1) git remote add origin URL :- To set remote reporsitory where we want to push/pull our code. 
+1. git remote add origin URL :- To set remote repository where we want to push/pull our code. 
 
 	Origin is just the name of connection although we can have any name but it's recommended to use origin.
 	We can verify it using below command.
 
-2) git remote -v :- Will show origin(name of the remote connection) details for push and pull.
+2. git remote -v :- Will show origin(name of the remote connection) details for push and pull.
 
-3) git branch -M main :- Using this command just to rename the branch , from master to main. NOT MUCH IMPORTANT COMMAND.
+3. git branch -M main :- Using this command just to rename the branch , from master to main. NOT MUCH IMPORTANT COMMAND.
 
-4) git push -u origin branchName :- Will push our branch from local repository to origin repository. We can push as many branches as we want.
+4. git push -u origin branchName :- Will push our branch from local repository to origin repository. We can push as many branches as we want.
 	
 	NOTE:- If using (3) then give main as branchName unless master as branchName. This is only for main/master branch.
 		 If want to push any other branch then use (4) again with NAME_OF_THE_BRANCH you want to push on Github.
 
-- After pushing our files to Github when we do changes in our file , then we have to add those files into the staged_area using (5) and have to perform commit using (6).
-   after commiting , our changes is still in local repository and if we want to push the changes on Github we have to use { git push }.
+- After pushing our files to GitHub when we do changes in our file , then we have to add those files into the staged area using (5) and have to perform commit using (6).
+   after committing , our changes is still in local repository and if we want to push the changes on Github we have to use { git push }.
    No need to write { -u origin branchName } because our machine knows now where to push.
 
 - Fork :- We can take any open source repository to our personal Github account (If that person(who's repository we are forking) has added you as a contributor in his account)
@@ -118,7 +213,13 @@
 	    and it's upto the owner of repository whether the owner want to merge your changes into main repository , if owner wants to accept your changes then owner has to accept 
 	    the pull request and then merge your repository with the main repository.
 
-(5) git clone Github_URL :- To bring a copy of repository from remote to our local machine.
+5. git clone Github_URL :- To bring a copy of repository from remote to our local machine.
+
+6. git fetch origin branchName :- Fetch the information of a particular branch from the remote repository.
+   git fetch :- Fetch the information of all branches from the remote repository.
+
+7. git pull :- It fetches the information of checked out branch and pull(i.e. merge) the latest code to our local repository making out repository sync with remote repository.
+   git pull origin:- Same as previous
 
 
 
