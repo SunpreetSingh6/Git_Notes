@@ -171,6 +171,7 @@ Now when the main branch gets any new commit it will be incorporated automatical
 
 Rebase is used to keep our commit history clean.
 Rebase shouldn't be used on shared branch.
+
 20) git rebase branchName :- It is use to rebase the branch.
 				To rebase we must be at the branch which should be added to tip of provided branchName.
 				i.e. git rebase master - we must be at feature branch because feature branch needs to rebase on master.
